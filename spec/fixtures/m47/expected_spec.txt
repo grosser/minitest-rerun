@@ -1,0 +1,7 @@
+  1) Failure:
+foo::bar#test_0001_baz [spec.rb:9]:
+Failed assertion, no message given.
+
+ruby spec.rb -n 'foo::bar#test_0001_baz'
+
+2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
