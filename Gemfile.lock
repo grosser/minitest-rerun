@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minitest-rerun (0.1.1)
+    minitest-rerun (0.1.2)
       minitest
 
 GEM
