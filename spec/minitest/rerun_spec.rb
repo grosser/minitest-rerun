@@ -30,4 +30,11 @@ describe Minitest::Rerun do
       it_works!("test")
     end
   end
+
+  it "shortens the path" do
+    Dir.chdir "spec/fixtures/m47" do
+      output = sh("bundle exec ruby #{Dir.pwd}/test.rb").sub(Dir.pwd, '-PWD-')
+      output.should include File.read("expected_test.txt").sub("[test.rb", "[-PWD-/test.rb")
+    end
+  end
 end

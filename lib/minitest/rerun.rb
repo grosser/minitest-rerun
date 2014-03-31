@@ -13,11 +13,8 @@ module Minitest::Rerun
 
     def test_file(location)
       tests_run = $0.split(" ").select { |f| File.exist?(f) }
-      if tests_run.size == 1
-        tests_run.first
-      else
-        location.sub(/^\.\//, "").sub("#{Dir.pwd}/", "")
-      end
+      location = tests_run.first if tests_run.size == 1
+      location.sub(/^\.\//, "").sub("#{Dir.pwd}/", "")
     end
   end
 
