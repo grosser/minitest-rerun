@@ -2,11 +2,11 @@ require "spec_helper"
 
 describe Minitest::Rerun do
   def sh(command)
-    Bundler.with_clean_env { `#{command}` }
+    Bundler.with_clean_env { `#{command}`.gsub(Dir.pwd, '-PWD-') }
   end
 
   def it_works!(kind)
-    output = sh("bundle exec ruby #{kind}.rb").sub(Dir.pwd, '-PWD-')
+    output = sh("bundle exec ruby #{kind}.rb")
     output.should include File.read("expected_#{kind}.txt")
 
     command = output[/^ruby .*/]
@@ -33,8 +33,15 @@ describe Minitest::Rerun do
 
   it "shortens the path" do
     Dir.chdir "spec/fixtures/m47" do
-      output = sh("bundle exec ruby #{Dir.pwd}/test.rb").sub(Dir.pwd, '-PWD-')
-      output.should include File.read("expected_test.txt").sub("[test.rb", "[-PWD-/test.rb")
+      output = sh("bundle exec ruby #{Dir.pwd}/test.rb")
+      output.should include File.read("expected_test.txt").sub("[test.rb:7]", "[-PWD-/test.rb:7]")
+    end
+  end
+
+  it "uses original location when running multiple files" do
+    Dir.chdir "spec/fixtures/m47" do
+      output = sh("ruby -rbundler/setup -r./test.rb -r./spec.rb -e 1")
+      output.should include File.read("expected_both.txt")
     end
   end
 end

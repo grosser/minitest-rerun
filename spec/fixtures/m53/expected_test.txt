@@ -2,6 +2,6 @@
 Test#test_xxx [test.rb:7]:
 Failed assertion, no message given.
 
-ruby test.rb -n 'Test#test_xxx'
+ruby test.rb -n 'Test#test_xxx' # test.rb:7
 
 2 runs, 2 assertions, 1 failures, 0 errors, 0 skips

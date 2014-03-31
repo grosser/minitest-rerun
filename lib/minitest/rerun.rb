@@ -4,17 +4,25 @@ module Minitest::Rerun
   class << self
     def rerun_command(msg)
       info = msg.to_s.split("\n")[1]
-      location = info[/ \[(.*?):\d+\]:/]
-      name = info.sub(location, "")
-      "ruby #{test_file($1)} -n '#{name}'"
+      location_part = info[/ \[((.*?):\d+)\]:/]
+      location = $1
+      file = $2
+      if location
+        name = info.sub(location_part, "")
+        "ruby #{test_file(file)} -n '#{name}' # #{relativize(location)}"
+      end
     end
 
     private
 
+    def relativize(location)
+      location.sub(/^\.\//, "").sub("#{Dir.pwd}/", "")
+    end
+
     def test_file(location)
       tests_run = $0.split(" ").select { |f| File.exist?(f) }
       location = tests_run.first if tests_run.size == 1
-      location.sub(/^\.\//, "").sub("#{Dir.pwd}/", "")
+      relativize(location)
     end
   end
 
