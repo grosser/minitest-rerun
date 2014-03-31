@@ -2,6 +2,8 @@ require "minitest/rerun/version"
 
 module Minitest::Rerun
   class << self
+    ASCII_COLORS = {:red => 31, :cyan => 36}
+
     def rerun_command(msg)
       info = msg.to_s.split("\n")[1]
       location_part = info[/ \[((.*?):\d+)\]:/]
@@ -9,11 +11,19 @@ module Minitest::Rerun
       file = $2
       if location
         name = info.sub(location_part, "")
-        "ruby #{test_file(file)} -n '#{name}' # #{relativize(location)}"
+        colorize(:red, "ruby #{test_file(file)} -n '#{name}' ") + colorize(:cyan, "# #{relativize(location)}")
       end
     end
 
     private
+
+    def colorize(color, string)
+      if $stdout.tty?
+        "\e[#{ASCII_COLORS[color]}m#{string}\e[0m"
+      else
+        string
+      end
+    end
 
     def relativize(location)
       location.sub(/^\.\//, "").sub("#{Dir.pwd}/", "")
