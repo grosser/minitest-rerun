@@ -1,14 +1,6 @@
 Print copy pasteable rerun snippets after failed runs
 
-```
-  1) Failure:
-Test#test_xxx [test.rb:7]:
-Failed assertion, no message given.
-
-ruby test.rb -n 'Test#test_xxx'
-
-2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
-```
+![](https://dl.dropboxusercontent.com/u/2670385/Web/minitest-rerun.png)
 
 Install
 =======
