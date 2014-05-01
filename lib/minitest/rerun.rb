@@ -11,7 +11,7 @@ module Minitest::Rerun
       file = $2
       if location
         name = info.sub(location_part, "")
-        colorize(:red, "ruby #{test_file(file)} -n '#{name}' ") + colorize(:cyan, "# #{relativize(location)}")
+        colorize(:red, "ruby #{test_file(file)} -n '#{name.gsub(%{'}, %{'"'"'})}' ") + colorize(:cyan, "# #{relativize(location)}")
       end
     end
 

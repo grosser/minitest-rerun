@@ -31,6 +31,12 @@ describe Minitest::Rerun do
     end
   end
 
+  it "works with quotes" do
+    Dir.chdir "spec/fixtures/quotes" do
+      it_works!("spec")
+    end
+  end
+
   it "shortens the path" do
     Dir.chdir "spec/fixtures/m47" do
       output = sh("bundle exec ruby #{Dir.pwd}/test.rb")

@@ -1,0 +1,7 @@
+  1) Failure:
+'"quotes#test_0001_'"quotes [spec.rb:8]:
+Failed assertion, no message given.
+
+ruby spec.rb -n ''"'"'"quotes#test_0001_'"'"'"quotes' # spec.rb:8
+
+2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
