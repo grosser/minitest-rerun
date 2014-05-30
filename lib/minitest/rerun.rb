@@ -9,10 +9,15 @@ module Minitest::Rerun
       location_part = info[/ \[((.*?):\d+)\]:/]
       location = $1
       file = $2
-      if location
-        name = info.sub(location_part, "")
-        colorize(:red, "ruby #{test_file(file)} -n '#{name.gsub(%{'}, %{'"'"'})}' ") + colorize(:cyan, "# #{relativize(location)}")
+      name = if location_part
+        info.sub(location_part, "")
+      else
+        info.sub(/:$/, "")
       end
+      file = test_file(file)
+      line = colorize(:red, "ruby #{file || "unknown"} -n '#{name.gsub(%{'}, %{'"'"'})}' ")
+      line << colorize(:cyan, "# #{relativize(location)}") if location
+      line
     end
 
     private
@@ -32,7 +37,7 @@ module Minitest::Rerun
     def test_file(location)
       tests_run = $0.split(" ").select { |f| File.exist?(f) }
       location = tests_run.first if tests_run.size == 1
-      relativize(location)
+      relativize(location) if location
     end
   end
 

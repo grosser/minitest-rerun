@@ -1,12 +1,16 @@
   1) Failure:
-Test#test_xxx [-PWD-/test.rb:7]:
+Test#test_xxx [test.rb:9]:
 Failed assertion, no message given.
 
-  2) Failure:
-foo::bar#test_0001_baz [-PWD-/spec.rb:9]:
+  2) Error:
+Test#test_zzz:
+RuntimeError:
+    test.rb:13:in `test_zzz'
+
+  3) Failure:
+foo::bar#test_0001_baz [spec.rb:9]:
 Failed assertion, no message given.
 
-ruby test.rb -n 'Test#test_xxx' # test.rb:7
+ruby test.rb -n 'Test#test_xxx' # test.rb:9
+ruby unknown -n 'Test#test_zzz'
 ruby spec.rb -n 'foo::bar#test_0001_baz' # spec.rb:9
-
-4 tests, 4 assertions, 2 failures, 0 errors, 0 skips

@@ -1,5 +1,5 @@
   1) Failure:
-SimpleTest#test_xxx [-PWD-/some_lib.rb:3]:
+SimpleTest#test_xxx [some_lib.rb:3]:
 Failed assertion, no message given.
 
 ruby test.rb -n 'SimpleTest#test_xxx' # some_lib.rb:3

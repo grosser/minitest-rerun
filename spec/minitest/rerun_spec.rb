@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Minitest::Rerun do
   def sh(command)
-    Bundler.with_clean_env { `#{command}`.gsub(Dir.pwd, '-PWD-') }
+    Bundler.with_clean_env { `#{command}`.gsub("#{Dir.pwd}/", '').gsub(/ $/, "") }
   end
 
   def it_works!(kind)
@@ -40,7 +40,7 @@ describe Minitest::Rerun do
   it "shortens the path" do
     Dir.chdir "spec/fixtures/m47" do
       output = sh("bundle exec ruby #{Dir.pwd}/test.rb")
-      output.should include File.read("expected_test.txt").sub("[test.rb:7]", "[-PWD-/test.rb:7]")
+      output.should include File.read("expected_test.txt")
     end
   end
 
