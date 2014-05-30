@@ -14,6 +14,14 @@ module Minitest::Rerun
       else
         info.sub(/:$/, "")
       end
+
+      # in minitest 5 we know file/line even for errors
+      if !location && msg.respond_to?(:name)
+        method = msg.method(msg.name)
+        file, line = method.source_location
+        location = "#{file}:#{line}"
+      end
+
       file = test_file(file)
       line = colorize(:red, "ruby #{file || "unknown"} -n '#{name.gsub(%{'}, %{'"'"'})}' ")
       line << colorize(:cyan, "# #{relativize(location)}") if location

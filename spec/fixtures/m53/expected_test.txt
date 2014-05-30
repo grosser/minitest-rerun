@@ -9,6 +9,6 @@ RuntimeError:
     test.rb:13:in `test_zzz'
 
 ruby test.rb -n 'Test#test_xxx' # test.rb:9
-ruby test.rb -n 'Test#test_zzz'
+ruby test.rb -n 'Test#test_zzz' # test.rb:12
 
 3 runs, 2 assertions, 1 failures, 1 errors, 0 skips
