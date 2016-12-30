@@ -1,6 +1,6 @@
 Print copy pasteable rerun snippets after failed runs
 
-![](https://dl.dropboxusercontent.com/u/2670385/Web/minitest-rerun.png)
+![](assets/minitest-rerun.png?raw=true)
 
 Install
 =======
